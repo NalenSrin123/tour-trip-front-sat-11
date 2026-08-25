@@ -5,10 +5,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={null} />
-          <Route path="*" element={null} />
-        </Route>
+        <Route path="/admin/*" element={<AdminLayout />} />
       </Routes>
     </BrowserRouter>
   );
