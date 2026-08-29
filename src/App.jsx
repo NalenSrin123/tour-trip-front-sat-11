@@ -1,14 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AdminLayout } from "./layouts/AdminLayout";
+import { AppRoutes } from "./services/AppRoutes";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/admin/*" element={<AdminLayout />} />
-      </Routes>
-    </BrowserRouter>
-  );
+export default function App() {
+    return <AppRoutes />;
 }
-
-export default App;
