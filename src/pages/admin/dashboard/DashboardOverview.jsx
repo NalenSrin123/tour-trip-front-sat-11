@@ -1,6 +1,6 @@
-import StatCard from "../../../components/review/StatCard";
-import MonthlyIncomeChart from "../../../components/review/MonthlyIncomeChart";
-import PopularTours from "../../../components/review/PopularTours";
+import StatCard from "../../../components/admin/StatCard";
+import MonthlyIncomeChart from "../../../components/admin/MonthlyIncomeChart";
+import PopularTours from "../../../components/admin/PopularTours";
 import { STATS_DATA } from "../../../constants/dashboardOverviewData";
 
 export default function DashboardOverview() {
