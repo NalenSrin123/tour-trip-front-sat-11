@@ -7,6 +7,8 @@ export const AppRoutes = () => {
         <Routes>
             <Route path="/admin/*" element={<AdminLayout />} />
             <Route path="/admin/dashboardOverview" element={<DashboardOverview />} />
+            <Route path="/verify-otp" element={<OtpVerifyPage />} />
+            <Route path="*" element={<Navigate to="/verify-otp" replace />} />
         </Routes>
     )
 }
