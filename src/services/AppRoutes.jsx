@@ -1,6 +1,7 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import DashboardOverview from "../pages/admin/dashboard/DashboardOverview";
 import { AdminLayout } from "../layouts/AdminLayout";
+import OtpVerifyPage from "../pages/public/auth/OtpVerifyPage";
 
 export const AppRoutes = () => {
     return (
