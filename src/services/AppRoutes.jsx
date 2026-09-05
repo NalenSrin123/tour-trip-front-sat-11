@@ -8,6 +8,7 @@ import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
+import CategoriesPage from "../pages/admin/categories/CategoriesPage";
 const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
@@ -41,7 +42,7 @@ export const AppRoutes = () => {
           path="/admin/manageBooking"
           element={<ManageBooking/>}
         />
-        
+         <Route path="/admin/categories" element={<ManageCategory page={CategoriesPage} />} />
         <Route path="/admin/categoriesPage" element={<CategoriesPage/>}/>
 
         <Route path="/admin/customerList" element={<CustomerList/>}/>

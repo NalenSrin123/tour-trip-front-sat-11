@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import * as categoryService from '../../../../services/categoryService';
 
-const PAGE_SIZE = 5;
-
-
 export function useCategories() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,13 +47,6 @@ export function useCategories() {
     });
   }, [categories, searchTerm, statusFilter]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredCategories.length / PAGE_SIZE));
-
-  const paginatedCategories = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    return filteredCategories.slice(start, start + PAGE_SIZE);
-  }, [filteredCategories, currentPage]);
-
   const stats = useMemo(() => {
     const total = categories.length;
     const active = categories.filter((c) => c.status === 'active').length;
@@ -90,7 +80,7 @@ export function useCategories() {
   }, []);
 
   return {
-    categories: paginatedCategories,
+    categories: filteredCategories,
     isLoading,
     error,
     retry: loadCategories,
@@ -104,9 +94,7 @@ export function useCategories() {
 
     currentPage,
     setCurrentPage,
-    totalPages,
     totalFilteredCount: filteredCategories.length,
-    pageSize: PAGE_SIZE,
 
     stats,
 
