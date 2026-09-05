@@ -1,0 +1,94 @@
+{
+  "tours": [
+    {
+      "id": 1,
+      "tourId": "T-001",
+      "name": "Angkor Wat Sunrise Signature Experience",
+      "category": "CULTURAL HERITAGE",
+      "price": 85,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 2,
+      "tourId": "T-042",
+      "name": "Hidden Jungle Temples Trek",
+      "category": "ADVENTURE & NATURE",
+      "price": 120,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 3,
+      "tourId": "T-015",
+      "name": "Tonle Sap Floating Village Half-Day",
+      "category": "LOCAL EXPERIENCE",
+      "price": 45,
+      "status": "Inactive",
+      "image": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 4,
+      "tourId": "T-099",
+      "name": "Banteay Srei Temple Tour",
+      "category": "CULTURAL HERITAGE",
+      "price": 65,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1600096194534-95cf5ece04cf?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 5,
+      "tourId": "T-112",
+      "name": "Preah Vihear Expedition",
+      "category": "ADVENTURE",
+      "price": 145,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 6,
+      "tourId": "T-067",
+      "name": "Mondulkiri Elephant Sanctuary",
+      "category": "ADVENTURE & NATURE",
+      "price": 95,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 7,
+      "tourId": "T-028",
+      "name": "Sihanoukville Beach Escape",
+      "category": "LOCAL EXPERIENCE",
+      "price": 110,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 8,
+      "tourId": "T-074",
+      "name": "Ratanakiri Jungle Trek",
+      "category": "ADVENTURE & NATURE",
+      "price": 130,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 9,
+      "tourId": "T-031",
+      "name": "Kep Crab Market Visit",
+      "category": "LOCAL EXPERIENCE",
+      "price": 40,
+      "status": "Active",
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=200&q=80"
+    },
+    {
+      "id": 10,
+      "tourId": "T-045",
+      "name": "Otres Beach Sunset Cruise",
+      "category": "LOCAL EXPERIENCE",
+      "price": 50,
+      "status": "Inactive",
+      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=200&q=80"
+    }
+  ]
+}
