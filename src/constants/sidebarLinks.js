@@ -23,6 +23,7 @@ export const sidebarLinks = [
   { label: "Tour Schedules", path: "/admin/tour-schedules", icon: CalendarDays },
   { label: "Manage Masters", path: "/admin/masters", icon: LayoutGrid },
   { label: "Manage Bookings", path: "/admin/bookings", icon: CalendarCheck },
+  { label :"Manage Categories",path: "/admin/categories",icon: LayoutGrid,},
   { label: "Manage Customers", path: "/admin/customers", icon: Users },
   { label: "Reports", path: "/admin/reports", icon: BarChart3 },
   { label: "Reviews", path: "/admin/reviews", icon: Star },
@@ -30,6 +31,6 @@ export const sidebarLinks = [
 
 /** @type {NavLinkItem[]} */
 export const sidebarFooterLinks = [
-  { label: "System Settings", path: "/admin/settings", icon: Settings },
+  { label: "System Settings", path: "/admin/stepPersonal", icon: Settings },
   { label: "Logout", path: "/logout", icon: LogOut },
 ];

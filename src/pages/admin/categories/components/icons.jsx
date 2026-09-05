@@ -26,6 +26,14 @@ export function SearchIcon(props) {
   );
 }
 
+export function FilterIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 6h16M7 12h10M10 18h4" />
+    </svg>
+  );
+}
+
 export function EditIcon(props) {
   return (
     <svg {...base} {...props}>
