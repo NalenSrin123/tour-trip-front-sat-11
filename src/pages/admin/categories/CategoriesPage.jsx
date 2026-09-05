@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import { useCategories } from './hooks/useCategories';
-import CategoryFilters from './components/CategoryFilters';
-import CategoryTable from './components/CategoryTable';
-import Pagination from './components/Pagination';
-import CategoryFormModal from './components/CategoryFormModal';
-import DeleteConfirmDialog from './components/DeleteConfirmDialog';
-import { PlusIcon, AlertTriangleIcon } from './components/icons';
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCategories } from "./hooks/useCategories";
+import CategoryFilters from "./components/CategoryFilters";
+import CategoryTable from "./components/CategoryTable";
+import Pagination from "./components/Pagination";
+import CategoryFormModal from "./components/CategoryFormModal";
+import CategoryViewModal from "./components/CategoryViewModal";
+import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
+import { PlusIcon, AlertTriangleIcon } from "./components/icons";
 
 export default function CategoriesPage() {
+  const navigate = useNavigate();
   const {
     categories,
     isLoading,
@@ -26,7 +28,11 @@ export default function CategoriesPage() {
   } = useCategories();
 
   const [formModal, setFormModal] = useState({ isOpen: false, category: null });
-  const [deleteDialog, setDeleteDialog] = useState({ isOpen: false, category: null });
+  const [viewModal, setViewModal] = useState({ isOpen: false, category: null });
+  const [deleteDialog, setDeleteDialog] = useState({
+    isOpen: false,
+    category: null,
+  });
 
   function openAddModal() {
     setFormModal({ isOpen: true, category: null });
@@ -104,7 +110,9 @@ export default function CategoriesPage() {
               <AlertTriangleIcon width={22} height={22} className="text-rose-500" />
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-700">Couldn't load categories</p>
+              <p className="text-sm font-medium text-slate-700">
+                Couldn't load categories
+              </p>
               <p className="text-sm text-slate-400 mt-0.5">{error}</p>
             </div>
             <button
@@ -139,7 +147,7 @@ export default function CategoriesPage() {
       </div>
 
       <CategoryFormModal
-        key={formModal.category?.id ?? 'new'}
+        key={formModal.category?.id ?? "new"}
         isOpen={formModal.isOpen}
         category={formModal.category}
         onClose={closeFormModal}

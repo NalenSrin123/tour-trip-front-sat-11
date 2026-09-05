@@ -29,6 +29,6 @@ export const sidebarLinks = [
 
 /** @type {NavLinkItem[]} */
 export const sidebarFooterLinks = [
-  { label: "System Settings", path: "/admin/settings", icon: Settings },
+  { label: "System Settings", path: "/admin/stepPersonal", icon: Settings },
   { label: "Logout", path: "/logout", icon: LogOut },
 ];
