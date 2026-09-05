@@ -6,6 +6,7 @@ import CategoriesPage from "../pages/admin/categories/CategoriesPage";
 import CustomerList from "../pages/CustomerList";
 import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
+import DestinationsPage from "../pages/admin/destinations";
 const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
@@ -43,6 +44,7 @@ export const AppRoutes = () => {
 
         <Route path="/admin/customerList" element={<CustomerList/>}/>
          <Route path="/admin/destinations/create" element={<CreateDestination />} />
+          <Route path="/admin/destinations" element={<DestinationsPage />} />
 
       </Route>
 
