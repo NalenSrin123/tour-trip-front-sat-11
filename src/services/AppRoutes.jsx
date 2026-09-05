@@ -11,5 +11,6 @@ export const AppRoutes = () => {
             <Route path="/verify-otp" element={<OtpVerifyPage />} />
             <Route path="*" element={<Navigate to="/verify-otp" replace />} />
         </Routes>
+        
     )
 }
