@@ -1,16 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CreateCategoryPage from "./pages/admin/categories/CreateCategoryPage";
+import { AppRoutes } from "./services/AppRoutes";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/admin/categories/create"
-          element={<CreateCategoryPage />}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+export default function App() {
+    return <AppRoutes />;
 }
-export default App;
