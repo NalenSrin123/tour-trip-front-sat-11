@@ -1,21 +1,61 @@
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, Outlet } from "react-router-dom";
 import DashboardOverview from "../pages/admin/dashboard/DashboardOverview";
-import { AdminLayout } from "../layouts/AdminLayout";
-import OtpVerifyPage from "../pages/public/auth/OtpVerifyPage";
+import { Sidebar } from "../components/layout/Sidebar";
+import ManageBooking from "../pages/admin/bookings/ManageBooking";
+import CategoriesPage from "../pages/admin/categories/CategoriesPage";
+import CustomerList from "../pages/CustomerList";
+import CreateDestination from "../pages/admin/destinations/CreateDestination";
+import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
+const AdminLayout = () => {
+  return (
+    <div className="flex min-h-screen">
+      <Sidebar />
+
+      <main className="flex-1">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
 export const AppRoutes = () => {
-    return (
-        <Routes>
-            {/* Manage Masters — Destinations is the section landing page for now */}
-            <Route path="/admin/masters" element={<AdminLayout />}>
-                <Route index element={<Navigate to="destinations" replace />} />
-                <Route path="destinations" element={<DestinationsPage />} />
-            </Route>
-            <Route path="/admin/*" element={<AdminLayout />} />
-            <Route path="/admin/dashboardOverview" element={<DashboardOverview />} />
-            <Route path="/verify-otp" element={<OtpVerifyPage />} />
-            <Route path="*" element={<Navigate to="/verify-otp" replace />} />
-        </Routes>
-    )
-}
+  return (
+    <Routes>
+       <Route path="/login" element={<LoginForm />} />
+      <Route path="/" element={<Navigate to="/admin" replace />} />
+
+      <Route path="/admin" element={<AdminLayout />}>
+        
+        <Route index element={<DashboardOverview />} />
+
+        
+        <Route
+          path="/admin"
+          element={<DashboardOverview />}
+        />
+        
+        <Route
+          path="/admin/manageBooking"
+          element={<ManageBooking/>}
+        />
+        
+        <Route path="/admin/categoriesPage" element={<CategoriesPage/>}/>
+
+        <Route path="/admin/customerList" element={<CustomerList/>}/>
+         <Route path="/admin/destinations/create" element={<CreateDestination />} />
+          <Route path="/admin/destinations" element={<DestinationsPage />} />
+
+      </Route>
+
+
+      
+      <Route
+        path="*"
+        element={<Navigate to="/admin" replace />}
+      />
+
+
+    </Routes>
+  );
+};
