@@ -4,7 +4,6 @@ import CategoryFilters from './components/CategoryFilters';
 import CategoryTable from './components/CategoryTable';
 import Pagination from './components/Pagination';
 import CategoryFormModal from './components/CategoryFormModal';
-import CategoryViewModal from './components/CategoryViewModal';
 import DeleteConfirmDialog from './components/DeleteConfirmDialog';
 import { PlusIcon, AlertTriangleIcon } from './components/icons';
 
@@ -21,18 +20,12 @@ export default function CategoriesPage() {
     setStatusFilter,
     hasActiveFilters,
     clearFilters,
-    currentPage,
-    setCurrentPage,
-    totalPages,
-    totalFilteredCount,
-    pageSize,
     addCategory,
     editCategory,
     removeCategory,
   } = useCategories();
 
   const [formModal, setFormModal] = useState({ isOpen: false, category: null });
-  const [viewModal, setViewModal] = useState({ isOpen: false, category: null });
   const [deleteDialog, setDeleteDialog] = useState({ isOpen: false, category: null });
 
   function openAddModal() {
@@ -40,7 +33,6 @@ export default function CategoriesPage() {
   }
 
   function openEditModal(category) {
-    setViewModal({ isOpen: false, category: null });
     setFormModal({ isOpen: true, category });
   }
 
@@ -55,14 +47,6 @@ export default function CategoriesPage() {
       await addCategory(values);
     }
     closeFormModal();
-  }
-
-  function openViewModal(category) {
-    setViewModal({ isOpen: true, category });
-  }
-
-  function closeViewModal() {
-    setViewModal({ isOpen: false, category: null });
   }
 
   function openDeleteDialog(category) {
@@ -82,25 +66,25 @@ export default function CategoriesPage() {
     <div className="p-6 space-y-6">
       {/* ─── Page header ─── */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Tour Categories</h1>
-        <p className="text-sm text-slate-500 mt-1">Organize your tours into categories admins and customers can browse by.</p>
+        <h1 className="text-2xl font-extrabold text-slate-900 sm:text-3xl tracking-tight">Manage Categories</h1>
+        <p className="mt-1 text-sm text-slate-500">Organize your tours into categories admins and customers can browse by.</p>
       </div>
 
       {/* ─── Main card ─── */}
       <div className="rounded-2xl bg-white border border-slate-200 shadow-sm">
-        <div className="flex flex-col gap-4 px-5 sm:px-6 py-5 border-b border-slate-100">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex-col gap-4 px-5 py-5 border-b border-slate-100 flex sm:px-6">
+          <div className="flex-col gap-4 flex sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-lg font-bold text-slate-800">Category Information</h2>
-              <p className="text-sm text-slate-500 mt-0.5">Manage tour categories</p>
+              <p className="mt-0.5 text-sm text-slate-500">Manage tour categories</p>
             </div>
             <button
               type="button"
               onClick={openAddModal}
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 shadow-sm hover:from-indigo-600 hover:to-blue-700 transition-all duration-150 w-fit shrink-0"
+              className="gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-teal-600 shadow-sm w-fit inline-flex items-center hover:bg-teal-700 transition-colors duration-150 shrink-0"
             >
               <PlusIcon width={17} height={17} />
-              Add Category
+              Add New Category
             </button>
           </div>
 
@@ -115,8 +99,8 @@ export default function CategoriesPage() {
         </div>
 
         {error ? (
-          <div className="flex flex-col items-center justify-center text-center gap-3 px-5 py-16">
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-rose-50">
+          <div className="flex-col gap-3 px-5 py-16 justify-center text-center flex items-center">
+            <div className="justify-center w-12 h-12 rounded-full bg-rose-50 flex items-center">
               <AlertTriangleIcon width={22} height={22} className="text-rose-500" />
             </div>
             <div>
@@ -138,17 +122,16 @@ export default function CategoriesPage() {
               isLoading={isLoading}
               hasActiveFilters={hasActiveFilters}
               onClearFilters={clearFilters}
-              onView={openViewModal}
               onEdit={openEditModal}
               onDelete={openDeleteDialog}
             />
             {!isLoading && (
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-                totalCount={totalFilteredCount}
-                pageSize={pageSize}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
+                totalCount={categories.length}
+                pageSize={categories.length || 1}
               />
             )}
           </>
@@ -161,12 +144,6 @@ export default function CategoriesPage() {
         category={formModal.category}
         onClose={closeFormModal}
         onSubmit={handleFormSubmit}
-      />
-
-      <CategoryViewModal
-        isOpen={viewModal.isOpen}
-        category={viewModal.category}
-        onClose={closeViewModal}
       />
 
       <DeleteConfirmDialog

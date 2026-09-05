@@ -9,19 +9,19 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 border-t border-slate-100">
+    <div className="flex-col gap-3 px-5 py-4 border-t border-slate-100 flex sm:flex-row sm:items-center sm:justify-between">
       <p className="text-sm text-slate-500">
-        Showing <span className="font-medium text-slate-700">{start}</span>–
+        Showing <span className="font-medium text-slate-700">{start}</span> to
         <span className="font-medium text-slate-700">{end}</span> of{' '}
-        <span className="font-medium text-slate-700">{totalCount}</span> categories
+        <span className="font-medium text-slate-700">{totalCount}</span> entries
       </p>
 
-      <div className="flex items-center gap-1.5">
+      <div className="gap-1.5 flex items-center">
         <button
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 text-slate-500 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors duration-150"
+          className="justify-center w-8 h-8 rounded-lg border border-slate-200 text-slate-500 bg-white flex items-center hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors duration-150"
           aria-label="Previous page"
         >
           <ChevronLeftIcon width={15} height={15} />
@@ -35,7 +35,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
             className={[
               'flex items-center justify-center w-8 h-8 rounded-lg text-sm font-medium border transition-colors duration-150',
               page === currentPage
-                ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
+                ? 'bg-teal-600 border-teal-600 text-white shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50',
             ].join(' ')}
           >
@@ -47,7 +47,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 text-slate-500 bg-white hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors duration-150"
+          className="justify-center w-8 h-8 rounded-lg border border-slate-200 text-slate-500 bg-white flex items-center hover:bg-slate-50 disabled:opacity-40 disabled:hover:bg-white transition-colors duration-150"
           aria-label="Next page"
         >
           <ChevronRightIcon width={15} height={15} />

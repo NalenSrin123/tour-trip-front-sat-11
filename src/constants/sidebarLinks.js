@@ -21,6 +21,7 @@ export const sidebarLinks = [
   { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
   { label: "Manage Masters", path: "/admin/masters", icon: LayoutGrid },
   { label: "Manage Bookings", path: "/admin/bookings", icon: CalendarCheck },
+  { label :"Manage Categories",path: "/admin/categories",icon: LayoutGrid,},
   { label: "Manage Customers", path: "/admin/customers", icon: Users },
   { label: "Reports", path: "/admin/reports", icon: BarChart3 },
   { label: "Reviews", path: "/admin/reviews", icon: Star },
