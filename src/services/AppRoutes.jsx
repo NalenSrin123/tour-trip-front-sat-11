@@ -4,7 +4,7 @@ import { Sidebar } from "../components/layout/Sidebar";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
 import CustomerList from "../pages/CustomerList";
-
+import CreateDestination from "../pages/admin/destinations/CreateDestination";
 
 const AdminLayout = () => {
   return (
@@ -42,6 +42,7 @@ export const AppRoutes = () => {
         <Route path="/admin/categoriesPage" element={<CategoriesPage/>}/>
 
         <Route path="/admin/customerList" element={<CustomerList/>}/>
+         <Route path="/admin/destinations/create" element={<CreateDestination />} />
 
       </Route>
 
