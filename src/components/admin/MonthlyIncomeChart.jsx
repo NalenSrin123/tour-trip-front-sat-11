@@ -221,7 +221,7 @@ export default function MonthlyIncomeChart() {
 
 
             {/* Chart */}
-            <div className="min-h-[280px] flex-1">
+            <div className="min -h- [280px] flex-1">
 
                 <Line
                     data={data}

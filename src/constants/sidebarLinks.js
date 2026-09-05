@@ -2,6 +2,7 @@ import {
   LayoutDashboard,
   LayoutGrid,
   CalendarCheck,
+  CalendarDays,
   Users,
   BarChart3,
   Star,
@@ -19,6 +20,7 @@ import {
 /** @type {NavLinkItem[]} */
 export const sidebarLinks = [
   { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
+  { label: "Tour Schedules", path: "/admin/tour-schedules", icon: CalendarDays },
   { label: "Manage Masters", path: "/admin/masters", icon: LayoutGrid },
   { label: "Manage Bookings", path: "/admin/bookings", icon: CalendarCheck },
   { label: "Manage Customers", path: "/admin/customers", icon: Users },
