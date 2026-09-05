@@ -36,7 +36,7 @@ const ForgotPassword = () => {
             Forgot Password
           </h1>
 
-          <p className="mx-auto mt-2 max-w-[280px] text-center text-sm leading-5 text-slate-500">
+          <p className="mx-auto mt-2 max -w- [280px] text-center text-sm leading-5 text-slate-500">
             Enter the email associated with your TourProject account to receive
             a reset link.
           </p>
