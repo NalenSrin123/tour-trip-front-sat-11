@@ -7,6 +7,7 @@ import CustomerList from "../pages/CustomerList";
 import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
+import RegisterForm from "../pages/public/auth/RegisterForm";
 const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
        <Route path="/login" element={<LoginForm />} />
+       <Route path="/register" element={<RegisterForm />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
 
       <Route path="/admin" element={<AdminLayout />}>
