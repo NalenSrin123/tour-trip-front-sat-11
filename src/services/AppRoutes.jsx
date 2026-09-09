@@ -8,7 +8,9 @@ import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
-import CategoriesPage from "../pages/admin/categories/CategoriesPage";
+import ManageCategory from "../pages/ManageCategory";
+import TourDetail from "../components/tour/TourDetailHero";
+
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 const AdminLayout = () => {
   return (
@@ -27,6 +29,7 @@ export const AppRoutes = () => {
     <Routes>
        <Route path="/login" element={<LoginForm />} />
        <Route path="/register" element={<RegisterForm />} />
+       <Route path="/tour/detail" element={<TourDetail />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
 
       <Route path="/admin" element={<AdminLayout />}>
@@ -59,7 +62,7 @@ export const AppRoutes = () => {
         path="*"
         element={<Navigate to="/admin" replace />}
       />
-
+      
 
     </Routes>
   );
