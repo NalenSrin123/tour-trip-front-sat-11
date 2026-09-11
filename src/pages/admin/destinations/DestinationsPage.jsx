@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react';
-import { Plus } from 'lucide-react';
-import MastersTabs from '../../../components/common/MastersTabs';
-import DestinationTable from './components/DestinationTable';
-import DestinationsPagination from './components/DestinationsPagination';
-import { mockDestinations } from './data/mockDestinations';
-import './destinations.css';
+import { useMemo, useState } from "react";
+import { Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import MastersTabs from "../../../components/common/MastersTabs";
+import DestinationTable from "./components/DestinationTable";
+import DestinationsPagination from "./components/DestinationsPagination";
+import { mockDestinations } from "./data/mockDestinations";
+import "./destinations.css";
 
 const PAGE_SIZE = 5;
 
@@ -13,6 +14,7 @@ const PAGE_SIZE = 5;
  * Add / edit / delete flows land in a later task; handlers are stubbed for now.
  */
 export default function DestinationsPage() {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalCount = mockDestinations.length;
@@ -27,10 +29,9 @@ export default function DestinationsPage() {
     setCurrentPage(Math.min(Math.max(page, 1), totalPages));
   }
 
-  // TODO: the three handlers below are wired up to the UI but intentionally
-  // inert — the create/edit form and delete confirmation dialog are a separate
-  // task. Each receives the row it was triggered from.
-  function handleAdd() {}
+  function handleAdd() {
+    navigate("/admin/destinations/create");
+  }
 
   function handleEdit(_destination) {}
 
