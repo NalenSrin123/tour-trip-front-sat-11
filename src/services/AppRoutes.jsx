@@ -3,16 +3,18 @@ import DashboardOverview from "../pages/admin/dashboard/DashboardOverview";
 import { Sidebar } from "../components/layout/Sidebar";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
+import ManageCategory from "../pages/ManageCategory";
 import CustomerList from "../pages/CustomerList";
 import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
-import CategoriesPage from "../pages/admin/categories/CategoriesPage";
 import TourSchedules from "../pages/admin/tours/TourSchedules";
+import Home from "../pages/Home";
+
 const AdminLayout = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen flex">
       <Sidebar />
 
       <main className="flex-1">
@@ -27,7 +29,7 @@ export const AppRoutes = () => {
     <Routes>
        <Route path="/login" element={<LoginForm />} />
        <Route path="/register" element={<RegisterForm />} />
-      <Route path="/" element={<Navigate to="/admin" replace />} />
+      <Route path="/" element={<Home />} />
 
       <Route path="/admin" element={<AdminLayout />}>
         
@@ -55,10 +57,7 @@ export const AppRoutes = () => {
 
 
       
-      <Route
-        path="*"
-        element={<Navigate to="/admin" replace />}
-      />
+      <Route path="*" element={<Navigate to="/admin" replace />} />
 
 
     </Routes>
