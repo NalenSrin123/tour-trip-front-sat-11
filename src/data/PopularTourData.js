@@ -19,7 +19,7 @@ export const PopularTourData = [
     rating: 4.8,
     category: "Beach",
     image:
-      "https://i.pinimg.com/736x/39/81/da/3981da927aeb35c5a69e89df039205ba.jpg",
+      "https://i.pinimg.com/1200x/35/63/f5/3563f55b84cac1600ea4f14ec30bedf0.jpg",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const PopularTourData = [
     rating: 4.7,
     category: "Nature",
     image:
-      "https://images.unsplash.com/photo-1519046904884-53103b34b206",
+      "https://i.pinimg.com/736x/c6/ff/eb/c6ffeb0c94b7eb628c6b1781ead730ea.jpg",
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ export const PopularTourData = [
     rating: 4.9,
     category: "Adventure",
     image:
-      "https://images.unsplash.com/photo-1433086966358-54859d0ed716",
+      "https://i.pinimg.com/1200x/45/79/aa/4579aa94f2dfdf9013c6016751bb803b.jpg",
   },
   {
     id: 6,
@@ -63,7 +63,7 @@ export const PopularTourData = [
     rating: 4.9,
     category: "Beach",
     image:
-      "https://images.unsplash.com/photo-1573843981267-be1999ff37cd",
+      "https://i.pinimg.com/1200x/95/04/b6/9504b6f4f1d6aad923e1fb144af627a5.jpg",
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ export const PopularTourData = [
     rating: 4.9,
     category: "Culture",
     image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b",
+      "https://i.pinimg.com/1200x/5f/b4/cd/5fb4cd94f9e727ed6323334e7307bcd6.jpg",
   },
   {
     id: 8,
@@ -85,6 +85,6 @@ export const PopularTourData = [
     rating: 4.9,
     category: "Nature",
     image:
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
+      "https://i.pinimg.com/1200x/b5/1d/b4/b51db413a1c07340a02ffe7dbf5d3e3f.jpg",
   },
 ];
