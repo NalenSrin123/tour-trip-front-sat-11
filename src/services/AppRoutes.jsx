@@ -4,6 +4,7 @@ import { Sidebar } from "../components/layout/Sidebar";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
 import ManageCategory from "../pages/ManageCategory";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
+import ManageCategory from "../pages/ManageCategory";
 import CustomerList from "../pages/CustomerList";
 import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
@@ -15,9 +16,10 @@ import TourDetail from "../components/tour/TourDetailHero";
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
 import PublicHome from "../pages/public/PublicHome";
+import Home from "../pages/Home";
 const AdminLayout = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen flex">
       <Sidebar />
 
       <main className="flex-1">
@@ -34,6 +36,7 @@ export const AppRoutes = () => {
        <Route path="/register" element={<RegisterForm />} />
        <Route path="/tour/detail" element={<TourDetail />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
+      <Route path="/" element={<Home />} />
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<DashboardOverview />} />
