@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Plus, Search, Trash2 } from "lucide-react";
+import React, { useState, useCallback, useEffect } from "react";
 import { cx } from "../../../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 const CustomerListPage = ({
   customers = [],
-  onCreate,
   highlightId,
   selectedIds = [],
   setSelectedIds,
   onDeleteSelected,
 }) => {
   /* ---------------------------- Customer List Page ---------------------------- */
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
   const getInitials = (name = "") =>
@@ -41,7 +43,7 @@ const CustomerListPage = ({
             </p>
           </div>
           <button
-            onClick={onCreate}
+            onClick={() => navigate("/admin/customers/create")}
             className="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-teal-700 hover:bg-teal-800 text-white text-[13.5px] font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-colors cursor-pointer"
           >
             <Plus className="w-4 h-4" /> Create Customer

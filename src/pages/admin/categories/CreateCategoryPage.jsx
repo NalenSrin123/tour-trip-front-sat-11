@@ -1,5 +1,7 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Plus, Search, Trash2 } from "lucide-react";
 import CategoryHeader from "../../../components/admin/CategoryHeader";
 import CatalogPreviewCard from "../../../components/admin/CatalogPreviewCard";
 import { Calendar, Save, RotateCcw, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
@@ -170,8 +172,8 @@ export default function CreateCategoryPage() {
                   <label
                     key={statusOption}
                     className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-colors ${formData.status === statusOption
-                        ? 'border-emerald-500 bg-emerald-50/30'
-                        : 'border-gray-100 hover:bg-gray-50'
+                      ? 'border-emerald-500 bg-emerald-50/30'
+                      : 'border-gray-100 hover:bg-gray-50'
                       }`}
                   >
                     <div className="flex items-center gap-2">

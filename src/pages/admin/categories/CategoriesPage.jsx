@@ -34,8 +34,8 @@ export default function CategoriesPage() {
     category: null,
   });
 
-  function openAddModal() {
-    setFormModal({ isOpen: true, category: null });
+  function openCreateCategoryPage() {
+    navigate("/admin/categories/create");
   }
 
   function openEditModal(category) {
@@ -86,7 +86,7 @@ export default function CategoriesPage() {
             </div>
             <button
               type="button"
-              onClick={openAddModal}
+              onClick={openCreateCategoryPage}
               className="gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-xl bg-teal-600 shadow-sm w-fit inline-flex items-center hover:bg-teal-700 transition-colors duration-150 shrink-0"
             >
               <PlusIcon width={17} height={17} />
@@ -137,7 +137,7 @@ export default function CategoriesPage() {
               <Pagination
                 currentPage={1}
                 totalPages={1}
-                onPageChange={() => {}}
+                onPageChange={() => { }}
                 totalCount={categories.length}
                 pageSize={categories.length || 1}
               />

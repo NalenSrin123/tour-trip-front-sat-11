@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FiPlus,
   FiSearch,
@@ -13,6 +14,7 @@ import {
 
 const TourSchedules = () => {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   const tours = [
     {
       tour_id: 1,
@@ -70,7 +72,10 @@ const TourSchedules = () => {
           </p>
         </div>
 
-        <button className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700">
+        <button
+          type="button"
+          onClick={() => navigate("/admin/tour-schedules/create")}
+          className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700">
           <FiPlus size={20} />
           Add Tour Schedule
         </button>

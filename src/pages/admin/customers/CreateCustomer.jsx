@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Check, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import CustomerListPage from "./CustomerListPage";
-import { emptyForm,INITIAL_CUSTOMERS,STEPS } from '../../../constants/customerConstant';
+import { emptyForm, INITIAL_CUSTOMERS, STEPS } from '../../../constants/customerConstant';
 import PhotoUpload from '../../../components/admin/PhotoUpload';
 import Label from '../../../components/admin/Label';
 import SelectField from '../../../components/admin/SelectField';
@@ -16,9 +16,8 @@ import Toast from '../../../components/admin/Toast';
 import { cx } from '../../../utils/helpers';
 
 
-
 const FONTS = (
-          <style>{`
+  <style>{`
             @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
             .font-display { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
             .font-body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
@@ -36,155 +35,158 @@ const FONTS = (
             .no-scrollbar::-webkit-scrollbar { display: none; }
             input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
           `}</style>
-        );
+);
 
 
-const CreateCustomer = () => { 
+const CreateCustomer = () => {
 
-    const [view, setView] = useState("list");
-    const [step, setStep] = useState(1);
-    const [furthestStep, setFurthestStep] = useState(1);
-    const [data, setData] = useState(emptyForm);
-    const [errors, setErrors] = useState({});
-    const [confirmed, setConfirmed] = useState(false);
-    const [saving, setSaving] = useState(false);
-    const [toast, setToast] = useState(null);
+  const [view, setView] = useState(
+    location.pathname === "/admin/customers/create"
+      ? "create"
+      : "list");
+  const [step, setStep] = useState(1);
+  const [furthestStep, setFurthestStep] = useState(1);
+  const [data, setData] = useState(emptyForm);
+  const [errors, setErrors] = useState({});
+  const [confirmed, setConfirmed] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState(null);
 
-    const [customers, setCustomers] = useState(INITIAL_CUSTOMERS);
+  const [customers, setCustomers] = useState(INITIAL_CUSTOMERS);
 
-    // Add this state
-    const [selectedIds, setSelectedIds] = useState([]);
+  // Add this state
+  const [selectedIds, setSelectedIds] = useState([]);
 
-    const [highlightId, setHighlightId] = useState(null);
+  const [highlightId, setHighlightId] = useState(null);
 
-    const handleDeleteSelected = () => {
+  const handleDeleteSelected = () => {
 
-      if (selectedIds.length === 0) return;
+    if (selectedIds.length === 0) return;
 
-      const confirmed = window.confirm(
-        "Are you sure you want to delete the selected customer(s)?"
-      );
+    const confirmed = window.confirm(
+      "Are you sure you want to delete the selected customer(s)?"
+    );
 
-      if (!confirmed) return;
+    if (!confirmed) return;
 
-      setCustomers((list) =>
-        list.filter((c) => !selectedIds.includes(c.id))
-      );
+    setCustomers((list) =>
+      list.filter((c) => !selectedIds.includes(c.id))
+    );
 
-      setSelectedIds([]);
+    setSelectedIds([]);
   };
-  
- 
-        useEffect(() => {
-          if (!toast) return;
-          const t = setTimeout(() => setToast(null), 3200);
-          return () => clearTimeout(t);
-        }, [toast]);
-      
-        const setField = useCallback((key, value) => {
-          setData((d) => ({ ...d, [key]: value }));
-          setErrors((e) => (e[key] ? { ...e, [key]: undefined } : e));
-        }, []);
-      
-        const toggleArrayField = useCallback((key, value) => {
-          setData((d) => {
-            const arr = d[key];
-            return { ...d, [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value] };
-          });
-        }, []);
-      
-        const resetAndGoToList = () => {
-          setData(emptyForm);
-          setErrors({});
-          setConfirmed(false);
-          setStep(1);
-          setFurthestStep(1);
-          setView("list");
-        };
-      
-        const validateStep1 = () => {
-          const e = {};
-          if (!data.fullName.trim()) e.fullName = "Full name is required.";
-          if (!data.email.trim()) e.email = "Email address is required.";
-          else if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = "Enter a valid email address.";
-          if (!data.phone.trim()) e.phone = "Phone number is required.";
-          setErrors(e);
-          return Object.keys(e).length === 0;
-        };
-      
-        const goNext = () => {
-          if (step === 1 && !validateStep1()) return;
-          const next = Math.min(step + 1, 3);
-          setStep(next);
-          setFurthestStep((f) => Math.max(f, next));
-        };
-      
-        const goBack = () => setStep((s) => Math.max(1, s - 1));
-      
-        const jumpToStep = (s) => setStep(s);
-      
-        const handleSaveDraft = () => {
-          setSaving("draft");
-          setTimeout(() => {
-            setSaving(false);
-            setToast("Draft saved.");
-          }, 900);
-        };
-      
-        const handleCreate = () => {
-          if (!validateStep1()) { setStep(1); setFurthestStep((f) => Math.max(f, 1)); return; }
-          if (step === 3 && !confirmed) return;
-          if (step !== 3) { setStep(3); setFurthestStep((f) => Math.max(f, 3)); return; }
-      
-          setSaving("create");
-          setTimeout(() => {
-            const initials = data.fullName.trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase()).join("") || "CU";
-            const newCustomer = {
-              id: `c${Date.now()}`,
-              name: data.fullName,
-              email: data.email,
-              destination: data.destination,
-              status: "Active",
-              created: "Aug 25, 2026",
-              initials,
-              photo: data.photo?.url || null,
-            };
-            setCustomers((list) => [newCustomer, ...list]);
-            setHighlightId(newCustomer.id);
-            setSaving(false);
-            setToast("Customer created successfully.");
-            setTimeout(() => {
-              resetAndGoToList();
-              setTimeout(() => setHighlightId(null), 2200);
-            }, 900);
-          }, 1200);
-        };
-      
-        if (view === "list") {
-          return (
-            <div className="anim-step-in">
-              {FONTS}
-              <Toast toast={toast} />
-              <CustomerListPage
-                customers={customers}
-                onCreate={() => setView("create")}
-                highlightId={highlightId}
-                selectedIds={selectedIds}
-                setSelectedIds={setSelectedIds}
-                onDeleteSelected={handleDeleteSelected}
-              />
 
-            </div>
-          );
-        }
-      
-        const isLastStep = step === 3;
- 
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 3200);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  const setField = useCallback((key, value) => {
+    setData((d) => ({ ...d, [key]: value }));
+    setErrors((e) => (e[key] ? { ...e, [key]: undefined } : e));
+  }, []);
+
+  const toggleArrayField = useCallback((key, value) => {
+    setData((d) => {
+      const arr = d[key];
+      return { ...d, [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value] };
+    });
+  }, []);
+
+  const resetAndGoToList = () => {
+    setData(emptyForm);
+    setErrors({});
+    setConfirmed(false);
+    setStep(1);
+    setFurthestStep(1);
+    setView("list");
+  };
+
+  const validateStep1 = () => {
+    const e = {};
+    if (!data.fullName.trim()) e.fullName = "Full name is required.";
+    if (!data.email.trim()) e.email = "Email address is required.";
+    else if (!/^\S+@\S+\.\S+$/.test(data.email)) e.email = "Enter a valid email address.";
+    if (!data.phone.trim()) e.phone = "Phone number is required.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const goNext = () => {
+    if (step === 1 && !validateStep1()) return;
+    const next = Math.min(step + 1, 3);
+    setStep(next);
+    setFurthestStep((f) => Math.max(f, next));
+  };
+
+  const goBack = () => setStep((s) => Math.max(1, s - 1));
+
+  const jumpToStep = (s) => setStep(s);
+
+  const handleSaveDraft = () => {
+    setSaving("draft");
+    setTimeout(() => {
+      setSaving(false);
+      setToast("Draft saved.");
+    }, 900);
+  };
+
+  const handleCreate = () => {
+    if (!validateStep1()) { setStep(1); setFurthestStep((f) => Math.max(f, 1)); return; }
+    if (step === 3 && !confirmed) return;
+    if (step !== 3) { setStep(3); setFurthestStep((f) => Math.max(f, 3)); return; }
+
+    setSaving("create");
+    setTimeout(() => {
+      const initials = data.fullName.trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase()).join("") || "CU";
+      const newCustomer = {
+        id: `c${Date.now()}`,
+        name: data.fullName,
+        email: data.email,
+        destination: data.destination,
+        status: "Active",
+        created: "Aug 25, 2026",
+        initials,
+        photo: data.photo?.url || null,
+      };
+      setCustomers((list) => [newCustomer, ...list]);
+      setHighlightId(newCustomer.id);
+      setSaving(false);
+      setToast("Customer created successfully.");
+      setTimeout(() => {
+        resetAndGoToList();
+        setTimeout(() => setHighlightId(null), 2200);
+      }, 900);
+    }, 1200);
+  };
+
+  if (view === "list") {
+    return (
+      <div className="anim-step-in">
+        {FONTS}
+        <Toast toast={toast} />
+        <CustomerListPage
+          customers={customers}
+          onCreate={() => setView("create")}
+          highlightId={highlightId}
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+          onDeleteSelected={handleDeleteSelected}
+        />
+
+      </div>
+    );
+  }
+
+  const isLastStep = step === 3;
+
   return (
     <div className="min-h-screen bg-gray-50 font-body">
       {FONTS}
       <Toast toast={toast} />
- 
+
       {/* Sticky header */}
       <div className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-gray-100">
         <div className="max-w-5xl mx-auto
@@ -234,7 +236,7 @@ const CreateCustomer = () => {
               Save Draft
             </button>
             <button
-              onClick={handleCreate}
+              onClick={() => navigate("/admin/customers/create")}
               disabled={saving === "create"}
               className="min-h-[44px]
                 w-full
@@ -264,7 +266,7 @@ const CreateCustomer = () => {
           <Stepper step={step} furthestStep={furthestStep} onJump={jumpToStep} />
         </div>
       </div>
- 
+
       {/* Content */}
       <div className="max-w-5xl mx-auto
         px-4 sm:px-6
@@ -274,7 +276,7 @@ const CreateCustomer = () => {
         {step === 2 && <StepTrip data={data} setField={setField} toggleArrayField={toggleArrayField} />}
         {step === 3 && <StepReview data={data} confirmed={confirmed} setConfirmed={setConfirmed} onEdit={jumpToStep} />}
       </div>
- 
+
       {/* Sticky footer */}
       <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur border-t border-gray-100">
         <div className="max-w-5xl mx-auto
@@ -295,7 +297,7 @@ const CreateCustomer = () => {
               Previous
             </span>
           </button>
- 
+
           {!isLastStep ? (
             <button
               onClick={goNext}
