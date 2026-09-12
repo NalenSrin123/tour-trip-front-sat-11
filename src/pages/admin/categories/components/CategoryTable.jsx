@@ -1,16 +1,9 @@
-import StatusBadge from './StatusBadge';
-import { getCategoryVisual } from './categoryVisuals';
-import { EyeIcon, EditIcon, TrashIcon, InboxIcon } from './icons';
+import { EditIcon, TrashIcon, InboxIcon } from './icons';
 
-const COLUMNS = ['ID', 'Category Name', 'Description', 'Tours', 'Status', 'Created Date', 'Actions'];
+const COLUMNS = ['Category Name', 'Slug', 'Tours', 'Actions'];
 
-function formatDate(isoDate) {
-  if (!isoDate) return '—';
-  return new Date(isoDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+function getCategorySlug(category) {
+  return category.slug || category.name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
 function SkeletonRows() {
@@ -29,15 +22,15 @@ function EmptyState({ hasActiveFilters, onClearFilters }) {
   return (
     <tr>
       <td colSpan={COLUMNS.length} className="px-5 py-16">
-        <div className="flex flex-col items-center justify-center text-center gap-3">
-          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-50">
+        <div className="flex-col gap-3 justify-center text-center flex items-center">
+          <div className="justify-center w-12 h-12 rounded-full bg-slate-50 flex items-center">
             <InboxIcon width={22} height={22} className="text-slate-400" />
           </div>
           <div>
             <p className="text-sm font-medium text-slate-700">
               {hasActiveFilters ? 'No categories match your filters' : 'No categories yet'}
             </p>
-            <p className="text-sm text-slate-400 mt-0.5">
+            <p className="mt-0.5 text-sm text-slate-400">
               {hasActiveFilters
                 ? 'Try a different search term or status.'
                 : 'Click "+ Add Category" to create your first one.'}
@@ -76,7 +69,7 @@ function ActionButton({ label, tone, onClick, children }) {
 }
 
 /** Category data table with loading skeleton and empty state built in. */
-export default function CategoryTable({ categories, isLoading, hasActiveFilters, onClearFilters, onView, onEdit, onDelete }) {
+export default function CategoryTable({ categories, isLoading, hasActiveFilters, onClearFilters, onEdit, onDelete }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left border-collapse">
@@ -102,47 +95,15 @@ export default function CategoryTable({ categories, isLoading, hasActiveFilters,
             <EmptyState hasActiveFilters={hasActiveFilters} onClearFilters={onClearFilters} />
           ) : (
             categories.map((category) => {
-              const visual = getCategoryVisual(category.icon);
-              const VisualIcon = visual.icon;
               return (
                 <tr key={category.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/60 transition-colors duration-150">
-                  <td className="px-5 py-4 text-sm text-slate-500 font-medium">#{String(category.id).padStart(3, '0')}</td>
                   <td className="px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      {category.image ? (
-                        <img
-                          src={category.image}
-                          alt=""
-                          className="w-9 h-9 rounded-xl object-cover border border-slate-200 shrink-0"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                      ) : (
-                        <div className={['flex items-center justify-center w-9 h-9 rounded-xl shrink-0', visual.bg].join(' ')}>
-                          <VisualIcon width={18} height={18} className={visual.fg} />
-                        </div>
-                      )}
-                      <span className="text-sm font-semibold text-slate-800 whitespace-nowrap">{category.name}</span>
-                    </div>
+                    <span className="text-sm font-semibold text-slate-800 whitespace-nowrap">{category.name}</span>
                   </td>
-                  <td className="px-5 py-4 text-sm text-slate-500 max-w-xs">
-                    <p className="truncate">{category.description || '—'}</p>
-                  </td>
+                  <td className="px-5 py-4 text-sm text-slate-500 whitespace-nowrap">{getCategorySlug(category)}</td>
                   <td className="px-5 py-4 text-sm font-medium text-slate-700">{category.toursCount}</td>
                   <td className="px-5 py-4">
-                    <StatusBadge status={category.status} />
-                  </td>
-                  <td className="px-5 py-4 text-sm text-slate-500 whitespace-nowrap">{formatDate(category.createdDate)}</td>
-                  <td className="px-5 py-4">
-                    <div className="flex items-center justify-end gap-2">
-                      <ActionButton
-                        label={`View ${category.name}`}
-                        tone="hover:bg-slate-50 hover:text-slate-700"
-                        onClick={() => onView(category)}
-                      >
-                        <EyeIcon width={15} height={15} />
-                      </ActionButton>
+                    <div className="gap-2 justify-end flex items-center">
                       <ActionButton
                         label={`Edit ${category.name}`}
                         tone="hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200"

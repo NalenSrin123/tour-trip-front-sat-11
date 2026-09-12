@@ -1,11 +1,11 @@
 const STYLES = {
-  active: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200',
-  inactive: 'bg-rose-50 text-rose-600 ring-1 ring-inset ring-rose-200',
+  active: 'bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-200',
+  inactive: 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200',
 };
 
 const DOT_STYLES = {
-  active: 'bg-emerald-500',
-  inactive: 'bg-rose-500',
+  active: 'bg-teal-500',
+  inactive: 'bg-slate-400',
 };
 
 /** Small pill badge showing a category's Active / Inactive status. */
