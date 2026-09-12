@@ -17,6 +17,7 @@ import TourSchedules from "../pages/admin/tours/TourSchedules";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
 import PublicHome from "../pages/public/PublicHome";
 import Home from "../pages/Home";
+import TripDetailPage from "../pages/public/trips/TripDetailPage";
 const AdminLayout = () => {
   return (
     <div className="min-h-screen flex">
@@ -84,6 +85,7 @@ export const AppRoutes = () => {
         />
         <Route path="/admin/destinations" element={<DestinationsPage />} />
         <Route path="/admin/tour-schedules" element={<TourSchedules />} />
+        <Route path="/trips/:id" element={<TripDetailPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/admin" replace />} />
