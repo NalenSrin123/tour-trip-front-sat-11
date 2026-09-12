@@ -9,6 +9,9 @@ import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
+import ManageCategory from "../pages/ManageCategory";
+import TourDetail from "../components/tour/TourDetailHero";
+
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
 import PublicHome from "../pages/public/PublicHome";
@@ -27,9 +30,10 @@ const AdminLayout = () => {
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/" element={<PublicHome />} />
+       <Route path="/login" element={<LoginForm />} />
+       <Route path="/register" element={<RegisterForm />} />
+       <Route path="/tour/detail" element={<TourDetail />} />
+      <Route path="/" element={<Navigate to="/admin" replace />} />
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<DashboardOverview />} />
