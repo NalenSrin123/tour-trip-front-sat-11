@@ -5,7 +5,6 @@ import MastersTabs from "../components/common/MastersTabs";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
 import ManageCategory from "../pages/ManageCategory";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
-import ManageCategory from "../pages/ManageCategory";
 import CreateCategoryPage from "../pages/admin/categories/CreateCategoryPage";
 import CustomerList from "../pages/CustomerList";
 import CreateCustomer from "../pages/admin/customers/CreateCustomer";
@@ -14,7 +13,6 @@ import CreateDestination from "../pages/admin/destinations/CreateDestination";
 import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
-import ManageCategory from "../pages/ManageCategory";
 import TourDetail from "../components/tour/TourDetailHero";
 
 import TourSchedules from "../pages/admin/tours/TourSchedules";
@@ -40,6 +38,7 @@ export const AppRoutes = () => {
        <Route path="/login" element={<LoginForm />} />
        <Route path="/register" element={<RegisterForm />} />
        <Route path="/tour/detail" element={<TourDetail />} />
+       <Route path="/trips/:id" element={<TripDetailPage />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
       <Route path="/" element={<Home />} />
 
@@ -92,7 +91,6 @@ export const AppRoutes = () => {
         />
         <Route path="/admin/destinations" element={<DestinationsPage />} />
         <Route path="/admin/tour-schedules" element={<TourSchedules />} />
-        <Route path="/trips/:id" element={<TripDetailPage />} />
         <Route path="tour-schedules/create" element={<CreateTour />} />
       </Route>
 
