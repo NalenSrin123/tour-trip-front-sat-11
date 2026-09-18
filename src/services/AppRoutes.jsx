@@ -14,6 +14,7 @@ import LoginForm from "../components/auth/LoginForm";
 import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
 import TourDetail from "../components/tour/TourDetailHero";
+import BookingPage from "../components/booking/BookingPage"
 
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
@@ -39,6 +40,7 @@ export const AppRoutes = () => {
        <Route path="/register" element={<RegisterForm />} />
        <Route path="/tour/detail" element={<TourDetail />} />
        <Route path="/trips/:id" element={<TripDetailPage />} />
+       <Route path="/booking" element={<BookingPage />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
       <Route path="/" element={<Home />} />
 
