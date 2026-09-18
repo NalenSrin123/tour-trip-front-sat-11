@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/layout/Sidebar";
 import { Topbar } from "../components/layout/Topbar";
 
-/** Shared navigation shell for every /admin route. */
+
 export function AdminLayout() {
   return (
     <div className="flex h-screen bg-slate-50">
