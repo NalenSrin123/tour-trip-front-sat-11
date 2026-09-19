@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const initialItineraries = [''];
 
 export default function Create() {
   const formRef = useRef(null);
-
+  const navigate = useNavigate();
   const [tourId, setTourId] = useState('');
   const [status, setStatus] = useState('Active');
   const [itineraries, setItineraries] = useState(initialItineraries);
@@ -190,7 +191,7 @@ export default function Create() {
               <label className="block text-xs font-semibold text-slate-700 mb-1">Status</label>
               <div className="flex w-full max-w-xs p-1 bg-slate-100 rounded-xl border border-slate-200">
 
-                <button  type="button"onClick={() => setStatus('Active')}
+                <button type="button" onClick={() => setStatus('Active')}
                   className={`flex-1 px-3 py-2 rounded-sm text-xs font-semibold text-center transition-all duration-150 ${status === 'Active'
                     ? 'bg-white m-0.5 text-teal-700 shadow-sm ring-1 ring-teal-200'
                     : 'text-slate-500 hover:text-slate-700'
@@ -221,11 +222,11 @@ export default function Create() {
                   {index + 1}
                 </div>
 
-                <input type="text" value={item} onChange={(e) =>handleItineraryChange(index, e.target.value)}
+                <input type="text" value={item} onChange={(e) => handleItineraryChange(index, e.target.value)}
                   placeholder={`What happens on day ${index + 1}...`}
-                  className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600"/>
+                  className="flex-1 px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600" />
                 {itineraries.length > 1 && (
-                  <button type="button"onClick={() => removeItineraryDay(index)}
+                  <button type="button" onClick={() => removeItineraryDay(index)}
                     className="shrink-0 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,11 +238,11 @@ export default function Create() {
               </div>
             ))}
 
-            <button type="button"onClick={addItineraryDay}
+            <button type="button" onClick={addItineraryDay}
               className="flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-800 transition mt-2 pt-1"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor"  viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
               Add another day
             </button>
@@ -262,10 +263,10 @@ export default function Create() {
               {/* Thumbnail */}
               <div className="w-30 h-30 rounded-lg border border-slate-200 bg-slate-50 overflow-hidden flex items-center justify-center shrink-0">
                 {thumbnail ? (
-                  <img src={thumbnail} alt="Thumbnail"className="w-full h-full object-cover" />
+                  <img src={thumbnail} alt="Thumbnail" className="w-full h-full object-cover" />
                 ) : (
-                  <svg className="w-8 h-8 text-slate-300"fill="none"stroke="currentColor" viewBox="0 0 24 24" >
-                    <path strokeLinecap="round" strokeLinejoin="round"strokeWidth="1.5"
+                  <svg className="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
                       d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                     />
                   </svg>
@@ -275,13 +276,13 @@ export default function Create() {
               {/* Upload */}
               <div>
                 <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-teal-700 text-teal-700 hover:bg-teal-50 rounded-lg text-xs font-semibold transition">
-                  <svg className="w-4 h-4"fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round"strokeLinejoin="round" strokeWidth="2"
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                     />
                   </svg>
                   {thumbnail ? 'Replace Image' : 'Upload New Image'}
-                  <input type="file" accept="image/*"onChange={handleImageUpload} className="hidden"/>
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                 </label>
 
                 <p className="text-[11px] text-slate-400 mt-2"> SVG, PNG, or JPG. Max file size 2MB.</p>

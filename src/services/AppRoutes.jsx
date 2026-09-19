@@ -1,7 +1,7 @@
 import { Navigate, Routes, Route, Outlet } from "react-router-dom";
 import DashboardOverview from "../pages/admin/dashboard/DashboardOverview";
 import { Sidebar } from "../components/layout/Sidebar";
-import MastersTabs from "../components/common/MastersTabs";
+import ManageMasters from "../pages/admin/masters/ManageMaster";
 import ManageBooking from "../pages/admin/bookings/ManageBooking";
 import ManageCategory from "../pages/ManageCategory";
 import CategoriesPage from "../pages/admin/categories/CategoriesPage";
@@ -21,6 +21,8 @@ import PublicHome from "../pages/public/PublicHome";
 import Home from "../pages/Home";
 import TripDetailPage from "../pages/public/trips/TripDetailPage";
 import CreateTour from "../components/tour/CreateTour";
+import EditTour from "../components/tour/EditTour";
+import DeleteTour from "../components/tour/DeleteTour";
 const AdminLayout = () => {
   return (
     <div className="min-h-screen flex">
@@ -35,18 +37,19 @@ const AdminLayout = () => {
 export const AppRoutes = () => {
   return (
     <Routes>
-       <Route path="/login" element={<LoginForm />} />
-       <Route path="/register" element={<RegisterForm />} />
-       <Route path="/tour/detail" element={<TourDetail />} />
-       <Route path="/trips/:id" element={<TripDetailPage />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/register" element={<RegisterForm />} />
+      <Route path="/tour/detail" element={<TourDetail />} />
+      <Route path="/trips/:id" element={<TripDetailPage />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
       <Route path="/" element={<Home />} />
 
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<DashboardOverview />} />
         <Route path="/admin" element={<DashboardOverview />} />
+        <Route path="/admin/masters" element={<ManageMasters />} />
+        <Route path="/admin/masters/tours/create" element={<CreateTour />} />
         <Route path="/admin/manageBooking" element={<ManageBooking />} />
-        <Route path="/admin/masters" element={<MastersTabs />} />
         <Route path="/admin/categories" element={<CategoriesPage />} />
         <Route
           path="/admin/categories/create"
@@ -57,7 +60,7 @@ export const AppRoutes = () => {
           path="/admin/customers/create"
           element={<CreateCustomer />}
         />
-        <Route path="/admin/categories" element={<CategoriesPage/>}/>
+        <Route path="/admin/categories" element={<CategoriesPage />} />
 
         <Route path="/admin/manageBooking" element={<ManageBooking />} />
         <Route
@@ -91,7 +94,8 @@ export const AppRoutes = () => {
         />
         <Route path="/admin/destinations" element={<DestinationsPage />} />
         <Route path="/admin/tour-schedules" element={<TourSchedules />} />
-        <Route path="tour-schedules/create" element={<CreateTour />} />
+        <Route path="/admin/masters/tours/edit/:id" element={<EditTour />} />
+        <Route path="/admin/masters/tours/delete/:id" element={<DeleteTour />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/admin" replace />} />
