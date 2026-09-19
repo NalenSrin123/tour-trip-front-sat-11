@@ -11,6 +11,7 @@ import RegisterForm from "../pages/public/auth/RegisterForm";
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import PopularTours from "../pages/public/PopularTours";
 import ManageCategory from "../pages/ManageCategory";
+import AboutPage from "../pages/public/AboutPage";
 
 const AdminLayout = () => {
   return (
@@ -30,6 +31,7 @@ export const AppRoutes = () => {
 
        <Route path="/login" element={<LoginForm />} />
        <Route path="/popularTours" element={<PopularTours />} />
+       <Route path="/about" element={<AboutPage />} />
 
        <Route path="/register" element={<RegisterForm />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
