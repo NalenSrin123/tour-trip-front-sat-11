@@ -15,7 +15,7 @@ import DestinationsPage from "../pages/admin/destinations";
 import RegisterForm from "../pages/public/auth/RegisterForm";
 import TourDetail from "../components/tour/TourDetailHero";
 import BookingPage from "../components/booking/BookingPage"
-
+import Reports from "../pages/admin/reports/Reports";
 import TourSchedules from "../pages/admin/tours/TourSchedules";
 import GuidesPage from "../pages/admin/guides/GuidesPage";
 import PublicHome from "../pages/public/PublicHome";
@@ -98,6 +98,7 @@ export const AppRoutes = () => {
         <Route path="/admin/tour-schedules" element={<TourSchedules />} />
         <Route path="/admin/masters/tours/edit/:id" element={<EditTour />} />
         <Route path="/admin/masters/tours/delete/:id" element={<DeleteTour />} />
+        <Route path="/reports" element={<Navigate to="/admin/reports" replace />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/admin" replace />} />
