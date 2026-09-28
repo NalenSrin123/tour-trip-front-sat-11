@@ -1,10 +1,12 @@
-import { Link, Navigate, Routes, Route, Outlet } from "react-router-dom";
+import { Navigate, Routes, Route, Outlet } from "react-router-dom";
 
 import { Sidebar } from "../components/layout/Sidebar";
-import SocialMedia from "../components/SocialMedia";
+import HeaderFooter from "../components/layout/header_footer";
 
 // Public pages
 import PublicHome from "../pages/public/PublicHome";
+import AboutPage from "../pages/public/AboutPage";
+import ToursPage from "../pages/public/ToursPage";
 import RegisterForm from "../pages/public/auth/RegisterForm";
 import LoginForm from "../components/auth/LoginForm";
 import TripDetailPage from "../pages/public/trips/TripDetailPage";
@@ -43,114 +45,10 @@ const AdminLayout = () => {
   );
 };
 
-const Navbar = () => (
-  <header className="border-b border-slate-200 bg-white">
-    <nav className="px-5 mx-auto min-h-16 max-w-7xl justify-between flex items-center sm:px-8" aria-label="Main navigation">
-      <Link to="/" className="font-serif text-xl font-semibold text-slate-900">
-        TourTrip
-      </Link>
-      <div className="gap-5 text-sm font-medium text-slate-700 flex items-center">
-        <Link to="/" className="transition-colors hover:text-blue-700">Home</Link>
-        <Link to="/trips/1" className="transition-colors hover:text-blue-700">Trips</Link>
-        <Link to="/contact" className="transition-colors hover:text-blue-700">Contact</Link>
-        <Link to="/login" className="transition-colors hover:text-blue-700">Log in</Link>
-      </div>
-    </nav>
-  </header>
-);
-
-const Footer = () => (
-  <footer className="px-5 pb-6 pt-8 bg-white sm:px-8">
-    <div className="mx-auto max-w-7xl">
-      <div className="mb-8 justify-center flex">
-        <SocialMedia />
-      </div>
-
-      <div className="grid grid-cols-2 gap-8 px-6 py-7 bg-[#293461] text-white sm:grid-cols-3 lg:grid-cols-5 lg:px-10">
-        <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-          <Link to="/" className="gap-3 inline-flex items-center">
-            <span className="grid rounded-full bg-white font-serif text-lg font-bold text-[#293461] size-10 place-items-center">
-              T
-            </span>
-            <span className="font-serif text-base font-semibold">Tour-Trip</span>
-          </Link>
-          <p className="mt-4 max-w-56 text-xs text-white/80 leading-relaxed">
-            Explore amazing destinations, create unforgettable memories, and
-            enjoy your journey with Tour-Trip.
-          </p>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-semibold">Company</h2>
-          <ul className="mt-3 text-xs text-white/80 space-y-1">
-            <li><Link to="/contact" className="hover:text-white">About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Our Services</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Careers</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Blog</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-semibold">Support</h2>
-          <ul className="mt-3 text-xs text-white/80 space-y-1">
-            <li><Link to="/contact" className="hover:text-white">FAQ</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Terms &amp; Conditions</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Privacy Policy</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Contact Us</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-semibold">Popular Destinations</h2>
-          <ul className="mt-3 text-xs text-white/80 space-y-1">
-            <li><Link to="/trips/1" className="hover:text-white">Siem Reap</Link></li>
-            <li><Link to="/trips/2" className="hover:text-white">Phnom Penh</Link></li>
-            <li><Link to="/trips/3" className="hover:text-white">Sihanoukville</Link></li>
-            <li><Link to="/trips/4" className="hover:text-white">Kampot</Link></li>
-          </ul>
-        </div>
-
-        <div className="col-span-2 sm:col-span-1">
-          <h2 className="text-sm font-semibold">Newsletter</h2>
-          <p className="mt-3 text-xs text-white/80 leading-relaxed">
-            Subscribe to get the latest tours, travel tips, and special offers.
-          </p>
-          <form
-            className="mt-4 overflow-hidden rounded-md bg-white flex"
-            onSubmit={(event) => event.preventDefault()}
-          >
-            <label className="sr-only" htmlFor="footer-email">
-              Your email
-            </label>
-            <input
-              id="footer-email"
-              type="email"
-              placeholder="Your email"
-              className="flex-1 px-3 py-2 min-w-0 text-xs text-slate-900 outline-none"
-            />
-            <button
-              type="submit"
-              className="px-3 py-2 bg-emerald-700 text-xs font-semibold text-white transition-colors hover:bg-emerald-800"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="px-6 py-3 bg-[#293461] text-center text-xs text-white/70">
-        © {new Date().getFullYear()} Tour-Trip. All rights reserved.
-      </div>
-    </div>
-  </footer>
-);
-
 const PublicLayout = () => (
-  <>
-    <Navbar />
+  <HeaderFooter>
     <Outlet />
-    <Footer />
-  </>
+  </HeaderFooter>
 );
 
 
@@ -164,6 +62,8 @@ export const AppRoutes = () => {
 
       <Route element={<PublicLayout />}>
         <Route path="/" element={<PublicHome />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/trips" element={<ToursPage />} />
         <Route path="/trips/:id" element={<TripDetailPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/customer" element={<CustomerList />} />

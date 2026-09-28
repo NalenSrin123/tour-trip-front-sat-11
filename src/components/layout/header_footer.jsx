@@ -1,6 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const NAV_LINKS = ["Home", "Tour", "About", "Contact", "Detail content"];
+const NAV_LINKS = [
+  { label: "Home", to: "/" },
+  { label: "Tour", to: "/trips" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+  { label: "Detail content", to: "/trips/1" },
+];
 
 const FOOTER_LINKS = {
   Company: ["About Us", "Our Services", "Careers", "Blog"],
@@ -279,7 +286,7 @@ const styles = `
   }
 `;
 
-export default function HeaderFooter() {
+export default function HeaderFooter({ children }) {
   const [navOpen, setNavOpen] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -295,14 +302,16 @@ export default function HeaderFooter() {
       <style>{styles}</style>
 
       <header className="tourtrip-header">
-        <div className="tourtrip-brand">
+        <Link to="/" className="tourtrip-brand" onClick={() => setNavOpen(false)}>
           <div className="tourtrip-logo">🌏</div>
           <span>Tour-Trip</span>
-        </div>
+        </Link>
 
         <button
+          type="button"
           className="tourtrip-nav-toggle"
           aria-label="Toggle menu"
+          aria-expanded={navOpen}
           onClick={() => setNavOpen((open) => !open)}
         >
           ☰
@@ -314,22 +323,26 @@ export default function HeaderFooter() {
         >
           <ul className="tourtrip-nav-list">
             {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a href="#">{link}</a>
+              <li key={link.label}>
+                <Link to={link.to} onClick={() => setNavOpen(false)}>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
 
         <div className="tourtrip-header-actions">
-          <a href="#" className="tourtrip-booking-link">
+          <Link to="/booking" className="tourtrip-booking-link" onClick={() => setNavOpen(false)}>
             Booking
-          </a>
-          <a href="#" className="tourtrip-signin-btn">
+          </Link>
+          <Link to="/login" className="tourtrip-signin-btn" onClick={() => setNavOpen(false)}>
             Sign in
-          </a>
+          </Link>
         </div>
       </header>
+
+      {children}
 
       <footer className="tt-site-footer">
         <div className="tt-footer-top">
