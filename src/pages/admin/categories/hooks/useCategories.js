@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import * as categoryService from '../../../../services/categoryService';
+import { updateCategory } from '../../../../services/updateCategoryService';
 
 export function useCategories() {
   const [categories, setCategories] = useState([]);
@@ -69,8 +70,12 @@ export function useCategories() {
   }, []);
 
   const editCategory = useCallback(async (id, payload) => {
-    const updated = await categoryService.updateCategory(id, payload);
-    setCategories((prev) => prev.map((c) => (c.id === id ? updated : c)));
+    const updated = await updateCategory(id, payload);
+
+    setCategories((prev) =>
+      prev.map((c) => (c.id === id ? updated : c))
+    );
+
     return updated;
   }, []);
 
