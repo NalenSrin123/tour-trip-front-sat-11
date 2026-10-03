@@ -1,18 +1,28 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Search, Trash2 } from "lucide-react";
+import {
+  Calendar,
+  Save,
+  RotateCcw,
+  ShieldCheck,
+  CheckCircle2,
+} from "lucide-react";
 import CategoryHeader from "../../../components/admin/CategoryHeader";
 import CatalogPreviewCard from "../../../components/admin/CatalogPreviewCard";
-import { Calendar, Save, RotateCcw, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { createCategory } from "../../../api/categoryApi";
 
 export default function CreateCategoryPage() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+
   const [formData, setFormData] = useState({
-    categoryCode: 'CAT-006',
-    categoryName: '',
-    description: '',
-    activationDate: '',
-    status: 'Active',
+    categoryCode: "CAT-006",
+    categoryName: "",
+    description: "",
+    activationDate: "",
+    status: "Active",
   });
 
   const handleChange = (e) => {
@@ -20,8 +30,34 @@ export default function CreateCategoryPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = () => {
-    console.log('Saved data:', formData);
+  const handleSave = async () => {
+    if (!formData.categoryName.trim()) {
+      alert("Category name is required");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const result = await createCategory(
+        formData.categoryName.trim(),
+        formData.description.trim()
+      );
+
+      console.log("Category created:", result);
+
+      alert("Category created successfully!");
+
+      navigate("/admin/categories");
+    } catch (error) {
+      console.error("Create category failed:", error);
+
+      alert(
+        error.message || "Failed to create category"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -150,10 +186,12 @@ export default function CreateCategoryPage() {
                 <button
                   type="button"
                   onClick={handleSave}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800"
+                  disabled={loading}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-emerald-700 text-white rounded-lg text-sm font-medium hover:bg-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save className="w-4 h-4" />
-                  Save Category
+
+                  {loading ? "Saving..." : "Save Category"}
                 </button>
               </div>
             </div>
