@@ -11,3 +11,32 @@ export const resendOtp = async ({ email }) => {
   const res = await axios.post(`${API_URL}/auth/resend-otp`, { email });
   return res.data;
 };
+
+export const registerUser = async (userData) => {
+  const res = await axios.post(`${API_URL}/auth/register`, userData);
+  return res.data;
+}
+// register
+
+const AuthService = {
+  register: async (formData) => {
+    const response = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Register failed");
+    }
+
+    return data;
+  },
+};
+
+export default AuthService;

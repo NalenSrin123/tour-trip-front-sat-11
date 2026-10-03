@@ -70,6 +70,40 @@ export const AppRoutes = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/booking" element={<BookingPage />} />
+        <Route path="/admin/manageBooking" element={<ManageBooking />} />
+        <Route
+          path="/admin/masters"
+          element={<Navigate to="/admin/masters/destinations" replace />}
+        />
+        <Route
+          path="/admin/categories"
+          element={<ManageCategory page={CategoriesPage} />}
+        />s
+        <Route path="/admin/categoriesPage" element={<CategoriesPage />} />
+
+        <Route path="/admin/masters/tours" element={<TourSchedules />} />
+        <Route path="/admin/masters/categories" element={<CategoriesPage />} />
+        <Route path="/admin/masters/guides" element={<GuidesPage />} />
+        <Route path="/admin/masters/schedules" element={<TourSchedules />} />
+
+        <Route path="/admin/customerList" element={<CustomerList />} />
+        <Route
+          path="/admin/masters/destinations/create"
+          element={<CreateDestination />}
+        />
+        <Route path="/admin/reviews" element={<ReviewsPage />} />
+        <Route
+          path="/admin/destinations/create"
+          element={<CreateDestination />}
+        />
+        <Route
+          path="/admin/masters/destinations"
+          element={<DestinationsPage />}
+        />
+        <Route path="/admin/destinations" element={<DestinationsPage />} />
+        <Route path="/admin/tour-schedules" element={<TourSchedules />} />
+        <Route path="/admin/masters/tours/edit/:id" element={<EditTour />} />
+        <Route path="/admin/masters/tours/delete/:id" element={<DeleteTour />} />
       </Route>
 
 
