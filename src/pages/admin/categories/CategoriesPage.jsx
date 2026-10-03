@@ -35,7 +35,7 @@ export default function CategoriesPage() {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     };
-    const endpoints = ["/api/tour-categories", "/api/categories"];
+    const endpoints = ["/api/categories"];
 
     setLoading(true);
     setError(null);

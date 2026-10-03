@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://tour-trip-sat-11-laravel.duckdns.org',
+        target: 'https://tour-trip-back-sat-11-laravel.onrender.com',
         changeOrigin: true,
       },
     },
