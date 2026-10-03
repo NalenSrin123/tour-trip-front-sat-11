@@ -7,8 +7,8 @@
             import linaAvatar from "../../../assets/images/avatars/Lily.jpg";
             import danielAvatar from "../../../assets/images/avatars/Daniel.jpg";
 
-            import kohRongImage from "../../../assets/images/trips/Kohrong(1).jpg";
-            import kampotImage from "../../../assets/images/trips/KP.jpg";
+            import kohRongImage from "../../../assets/images/trips/kohrong(1).jpg";
+            import kampotImage from "../../../assets/images/trips/kP.jpg";
             import phnomPenhImage from "../../../assets/images/trips/PP at night.jpg";
             import mondulkiriImage from "../../../assets/images/trips/mondulkiri.jpg";
             import { Link } from "react-router-dom";
