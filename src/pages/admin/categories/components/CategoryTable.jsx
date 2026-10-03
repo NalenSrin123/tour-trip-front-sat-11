@@ -1,6 +1,6 @@
 import { EditIcon, TrashIcon, InboxIcon } from './icons';
 
-const COLUMNS = ['Category Name', 'Slug', 'Tours', 'Actions'];
+const COLUMNS = ['Category Name', 'Description', 'Tours', 'Actions'];
 
 function getCategorySlug(category) {
   return category.slug || category.name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
