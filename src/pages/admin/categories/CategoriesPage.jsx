@@ -35,7 +35,7 @@ export default function CategoriesPage() {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     };
-    const endpoints = ["/api/categories"];
+    const endpoints = ["https://tour-trip-back-sat-11-laravel.onrender.com/api/categories"];
 
     setLoading(true);
     setError(null);
