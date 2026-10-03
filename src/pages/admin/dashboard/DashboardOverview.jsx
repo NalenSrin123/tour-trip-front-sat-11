@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import StatCard from "../../../components/admin/StatCard";
 import MonthlyIncomeChart from "../../../components/admin/MonthlyIncomeChart";
 import PopularTours from "../../../components/admin/PopularTours";
 import { STATS_DATA } from "../../../constants/dashboardOverviewData";
+import { fetchTours } from "../../../services/tourService";
+
+const DEMO_TOUR_COUNT = 42; // matches INITIAL_TOURS in ManageMaster.jsx
 
 export default function DashboardOverview() {
+     const [extraToursCount, setExtraToursCount] = useState(0);
+    useEffect(() => {
+        fetchTours()
+            .then((response) => {
+                const backendTours = response?.data ?? response ?? [];
+                setExtraToursCount(backendTours.length);
+            })
+            .catch(() => {
+                // Backend not running yet — keep showing the demo count only.
+            });
+    }, []);
+
+    const stats = STATS_DATA.map((stat) =>
+        stat.title === "Total Tours"
+            ? { ...stat, value: String(DEMO_TOUR_COUNT + extraToursCount) }
+            : stat
+    );
+
+
     return (
         <div className="min-h-screen bg-slate-50/50 p-8">
             <div className="max-w-7xl mx-auto space-y-8">
@@ -25,7 +48,7 @@ export default function DashboardOverview() {
                 </div>
                 {/* Top Metric Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {STATS_DATA.map((stat, idx) => (
+                    {stats.map((stat, idx) => (
                         <StatCard key={idx} {...stat} />
                     ))}
                 </div>
