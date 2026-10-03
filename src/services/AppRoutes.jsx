@@ -98,7 +98,7 @@ export const AppRoutes = () => {
         <Route path="/admin/tour-schedules" element={<TourSchedules />} />
         <Route path="/admin/masters/tours/edit/:id" element={<EditTour />} />
         <Route path="/admin/masters/tours/delete/:id" element={<DeleteTour />} />
-        <Route path="/reports" element={<Navigate to="/admin/reports" replace />} />
+        <Route path="reports" element={<Navigate to="/admin/reports" replace />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/admin" replace />} />
