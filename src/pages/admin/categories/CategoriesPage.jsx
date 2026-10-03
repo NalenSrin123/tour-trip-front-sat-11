@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useCategories } from "./hooks/useCategories";
+import * as categoryService from "../../../services/categoryService";
 import CategoryFilters from "./components/CategoryFilters";
 import CategoryTable from "./components/CategoryTable";
 import Pagination from "./components/Pagination";
@@ -11,21 +12,11 @@ import { PlusIcon, AlertTriangleIcon } from "./components/icons";
 
 export default function CategoriesPage() {
   const navigate = useNavigate();
-  const {
-    categories,
-    isLoading,
-    error,
-    retry,
-    searchTerm,
-    setSearchTerm,
-    statusFilter,
-    setStatusFilter,
-    hasActiveFilters,
-    clearFilters,
-    addCategory,
-    editCategory,
-    removeCategory,
-  } = useCategories();
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const [formModal, setFormModal] = useState({ isOpen: false, category: null });
   const [viewModal, setViewModal] = useState({ isOpen: false, category: null });
@@ -33,6 +24,116 @@ export default function CategoriesPage() {
     isOpen: false,
     category: null,
   });
+
+  const loadCategories = useCallback(async () => {
+    const token = localStorage.getItem("token")
+      || localStorage.getItem("access_token")
+      || localStorage.getItem("authToken");
+    const config = {
+      headers: {
+        Accept: "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+    };
+    const endpoints = ["/api/tour-categories", "/api/categories"];
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      let response;
+
+      for (const endpoint of endpoints) {
+        try {
+          response = await axios.get(endpoint, config);
+          break;
+        } catch (requestError) {
+          if (requestError.response?.status !== 404 || endpoint === endpoints.at(-1)) {
+            throw requestError;
+          }
+        }
+      }
+
+      if (!response || response.status !== 200) {
+        throw new Error("Unable to load categories.");
+      }
+
+      const payload = response.data;
+      const list = Array.isArray(payload)
+        ? payload
+        : payload?.data ?? payload?.categories;
+
+      if (!Array.isArray(list)) {
+        throw new Error("The categories response has an unexpected format.");
+      }
+
+      setCategories(list.map((item) => ({
+        ...item,
+        id: item.id,
+        name: item.category_name,
+        slug: item.description || item.slug || "-",
+        toursCount: item.tours_count ?? item.tours?.length ?? 0,
+      })));
+    } catch (requestError) {
+      const status = requestError.response?.status;
+      const responseMessage = requestError.response?.data?.message;
+      setError(
+        status === 401
+          ? "Your session has expired. Please sign in again."
+          : status === 403
+            ? "You do not have permission to view categories."
+            : typeof responseMessage === "string"
+              ? responseMessage
+              : status === 404
+                ? "Categories endpoint was not found."
+                : status === 500
+                  ? "The server could not load categories. Please try again."
+                  : requestError.message || "Failed to load categories.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadCategories();
+  }, [loadCategories]);
+
+  const filteredCategories = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+
+    return categories.filter((category) => {
+      const matchesSearch = !term || category.name.toLowerCase().includes(term);
+      const matchesStatus = statusFilter === "all" || category.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [categories, searchTerm, statusFilter]);
+
+  const hasActiveFilters = searchTerm.trim() !== "" || statusFilter !== "all";
+
+  function clearFilters() {
+    setSearchTerm("");
+    setStatusFilter("all");
+  }
+
+  const addCategory = useCallback(async (values) => {
+    const created = await categoryService.createCategory(values);
+    setCategories((previous) => [created, ...previous]);
+    return created;
+  }, []);
+
+  const editCategory = useCallback(async (id, values) => {
+    const updated = await categoryService.updateCategory(id, values);
+    setCategories((previous) => previous.map((category) => (
+      category.id === id ? updated : category
+    )));
+    return updated;
+  }, []);
+
+  const removeCategory = useCallback(async (id) => {
+    await categoryService.deleteCategory(id);
+    setCategories((previous) => previous.filter((category) => category.id !== id));
+  }, []);
 
   function openCreateCategoryPage() {
     navigate("/admin/categories/create");
@@ -117,7 +218,7 @@ export default function CategoriesPage() {
             </div>
             <button
               type="button"
-              onClick={retry}
+              onClick={loadCategories}
               className="mt-1 px-4 py-2 text-sm font-medium text-white rounded-xl bg-slate-800 hover:bg-slate-900 transition-colors duration-150"
             >
               Try again
@@ -126,20 +227,20 @@ export default function CategoriesPage() {
         ) : (
           <>
             <CategoryTable
-              categories={categories}
-              isLoading={isLoading}
+              categories={filteredCategories}
+              isLoading={loading}
               hasActiveFilters={hasActiveFilters}
               onClearFilters={clearFilters}
               onEdit={openEditModal}
               onDelete={openDeleteDialog}
             />
-            {!isLoading && (
+            {!loading && (
               <Pagination
                 currentPage={1}
                 totalPages={1}
                 onPageChange={() => { }}
-                totalCount={categories.length}
-                pageSize={categories.length || 1}
+                totalCount={filteredCategories.length}
+                pageSize={filteredCategories.length || 1}
               />
             )}
           </>
