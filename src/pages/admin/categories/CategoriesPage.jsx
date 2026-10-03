@@ -70,7 +70,7 @@ export default function CategoriesPage() {
       setCategories(list.map((item) => ({
         ...item,
         id: item.id,
-        name: item.category_name,
+        name: item.name || item.name || "Untitled category",
         slug: item.description || item.slug || "-",
         toursCount: item.tours_count ?? item.tours?.length ?? 0,
       })));
