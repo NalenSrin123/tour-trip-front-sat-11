@@ -62,8 +62,8 @@ const TourSchedules = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-100 p-4 md:p-6">
-      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="p-4 min-h-screen bg-slate-100 md:p-6">
+      <div className="flex-col mb-6 gap-4 flex md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Tour Schedules</h1>
 
@@ -74,34 +74,34 @@ const TourSchedules = () => {
 
         <button
           type="button"
-          onClick={() => navigate("/admin/tour-schedules/create")}
-          className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700">
+          onClick={() => navigate("/admin/masters/tours/create")}
+          className="gap-2 px-5 py-3 justify-center rounded-xl bg-blue-600 font-semibold text-white shadow-sm flex items-center transition hover:bg-blue-700">
           <FiPlus size={20} />
           Add Tour Schedule
         </button>
       </div>
-      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 mb-6 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Total Tours */}
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
+        <div className="p-5 rounded-2xl bg-white shadow-sm">
           <p className="text-sm text-slate-500">Total Tours</p>
           <h2 className="mt-2 text-2xl font-bold text-slate-800">
             {tours.length}
           </h2>
         </div>
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
+        <div className="p-5 rounded-2xl bg-white shadow-sm">
           <p className="text-sm text-slate-500">Average Price</p>
 
           <h2 className="mt-2 text-2xl font-bold text-blue-600">$48.75</h2>
         </div>
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
+        <div className="p-5 rounded-2xl bg-white shadow-sm">
           <p className="text-sm text-slate-500">Average Rating</p>
 
-          <h2 className="mt-2 flex items-center gap-1 text-2xl font-bold text-slate-800">
+          <h2 className="mt-2 gap-1 text-2xl font-bold text-slate-800 flex items-center">
             4.7
-            <FiStar size={20} className="fill-yellow-400 text-yellow-400" />
+            <FiStar size={20} className="text-yellow-400 fill-yellow-400" />
           </h2>
         </div>
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
+        <div className="p-5 rounded-2xl bg-white shadow-sm">
           <p className="text-sm text-slate-500">Active Tours</p>
 
           <h2 className="mt-2 text-2xl font-bold text-green-600">
@@ -110,7 +110,7 @@ const TourSchedules = () => {
         </div>
       </div>
       <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
-        <div className="flex flex-col gap-4 border-b border-slate-200 p-5 md:flex-row md:items-center md:justify-between">
+        <div className="flex-col gap-4 p-5 border-b border-slate-200 flex md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-lg font-bold text-slate-800">
               All Tour Schedules
@@ -119,17 +119,17 @@ const TourSchedules = () => {
               {filteredTours.length} schedules found
             </p>
           </div>
-          <div className="relative w-full md:w-80">
+          <div className="w-full relative md:w-80">
             <FiSearch
               size={19}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              className="top-1/2 text-slate-400 absolute left-3 -translate-y-1/2"
             />
             <input
               type="text"
               placeholder="Search tour schedule..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="py-3 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm pl-10 pr-4 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
             />
           </div>
         </div>
@@ -137,28 +137,28 @@ const TourSchedules = () => {
           <table className="w-full min-w-275 text-left">
             <thead className="bg-slate-50">
               <tr className="border-b border-slate-200">
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   ID
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Tour
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Destination
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Price
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Duration
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Rating
                 </th>
-                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Created
                 </th>
-                <th className="px-5 py-4 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="px-5 py-4 text-center text-xs font-semibold text-slate-500 uppercase tracking-wide">
                   Actions
                 </th>
               </tr>
@@ -186,28 +186,28 @@ const TourSchedules = () => {
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-2 text-sm text-slate-600">
+                      <div className="gap-2 text-sm text-slate-600 flex items-center">
                         <FiMapPin size={17} className="text-blue-500" />
                         Destination #{tour.destination_id}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-1 font-bold text-blue-600">
+                      <div className="gap-1 font-bold text-blue-600 flex items-center">
                         <FiDollarSign size={16} />
                         {tour.price}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-2 text-sm text-slate-600">
+                      <div className="gap-2 text-sm text-slate-600 flex items-center">
                         <FiClock size={16} className="text-slate-400" />
                         {tour.duration}
                       </div>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex items-center gap-1">
+                      <div className="gap-1 flex items-center">
                         <FiStar
                           size={16}
-                          className="fill-yellow-400 text-yellow-400"
+                          className="text-yellow-400 fill-yellow-400"
                         />
                         <span className="font-semibold text-slate-700">
                           {tour.rating_avg}
@@ -220,10 +220,10 @@ const TourSchedules = () => {
                       </span>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex justify-center gap-2">
+                      <div className="gap-2 justify-center flex">
                         <button
                           title="View"
-                          className="rounded-lg bg-blue-50 p-2 text-blue-600 transition hover:bg-blue-100"
+                          className="p-2 rounded-lg bg-blue-50 text-blue-600 transition hover:bg-blue-100"
                         >
                           <FiEye size={17} />
                         </button>
@@ -231,7 +231,7 @@ const TourSchedules = () => {
                         {/* Edit */}
                         <button
                           title="Edit"
-                          className="rounded-lg bg-yellow-50 p-2 text-yellow-600 transition hover:bg-yellow-100"
+                          className="p-2 rounded-lg bg-yellow-50 text-yellow-600 transition hover:bg-yellow-100"
                         >
                           <FiEdit size={17} />
                         </button>
@@ -239,7 +239,7 @@ const TourSchedules = () => {
                         {/* Delete */}
                         <button
                           title="Delete"
-                          className="rounded-lg bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
+                          className="p-2 rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"
                         >
                           <FiTrash2 size={17} />
                         </button>
@@ -260,7 +260,7 @@ const TourSchedules = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex-col gap-3 p-5 border-t border-slate-200 flex sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-slate-500">
             Showing{" "}
             <span className="font-semibold text-slate-700">
@@ -271,16 +271,16 @@ const TourSchedules = () => {
             tours
           </p>
 
-          <div className="flex gap-2">
-            <button className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-500 transition hover:bg-slate-50">
+          <div className="gap-2 flex">
+            <button className="px-4 py-2 rounded-lg border border-slate-200 text-sm text-slate-500 transition hover:bg-slate-50">
               Previous
             </button>
 
-            <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
+            <button className="px-4 py-2 rounded-lg bg-blue-600 text-sm font-semibold text-white">
               1
             </button>
 
-            <button className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-500 transition hover:bg-slate-50">
+            <button className="px-4 py-2 rounded-lg border border-slate-200 text-sm text-slate-500 transition hover:bg-slate-50">
               Next
             </button>
           </div>
