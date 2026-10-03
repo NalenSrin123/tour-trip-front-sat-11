@@ -70,7 +70,7 @@ export const AppRoutes = () => {
         <Route
           path="/admin/categories"
           element={<ManageCategory page={CategoriesPage} />}
-        />
+        />s
         <Route path="/admin/categoriesPage" element={<CategoriesPage />} />
 
         <Route path="/admin/masters/tours" element={<TourSchedules />} />
