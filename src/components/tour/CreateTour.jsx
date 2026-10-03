@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { createTour } from "../../services/tourService";
+
 
 const initialItineraries = [''];
 
@@ -10,6 +12,10 @@ export default function Create() {
   const [status, setStatus] = useState('Active');
   const [itineraries, setItineraries] = useState(initialItineraries);
   const [thumbnail, setThumbnail] = useState(null);
+
+  const [isSaving, setIsSaving] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Handle Itinerary Days
   const handleItineraryChange = (index, value) => {
@@ -50,8 +56,43 @@ export default function Create() {
   };
 
   // Save Tour
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    const category = formData.get('category');
+    const destination = formData.get('destination');
+    const title = String(formData.get('tourName') || '').trim();
+    const price = Number(formData.get('price'));
+    const duration = String(formData.get('duration') || '').trim();
+
+    const categoryIds = { cultural: 1, adventure: 2 };
+    const destinationIds = { 'siem-reap': 1, 'phnom-penh': 2 };
+
+    if (!tourId.trim() || !title || !category || !Number.isFinite(price)) {
+        setErrorMessage('Please fill in Tour ID, Tour Name, Category, and a valid Price.');
+        return;
+    }
+
+    const requestBody = {
+        category_id: categoryIds[category],
+        title,
+        price,
+        ...(destination ? { destination_id: destinationIds[destination] } : {}),
+        ...(duration ? { duration } : {}),
+    };
+
+    try {
+        setIsSaving(true);
+        await createTour(requestBody);
+        setSuccessMessage('Tour "' + title + '" was saved to the database.');
+    } catch (error) {
+        setErrorMessage(error instanceof Error ? error.message : 'Unable to create tour.');
+    } finally {
+        setIsSaving(false);
+    }
   };
 
   return (
@@ -60,8 +101,11 @@ export default function Create() {
 
         {/* Header Navigation */}
         <div>
-          <button type="button"
-            className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 transition mb-3">
+          <button
+             type="button"
+             onClick={() => navigate("/admin/tour-master")}
+             className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 transition mb-3">
+        
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg> Back to Tours & Masters
@@ -290,15 +334,26 @@ export default function Create() {
             </div>
           </div>
         </div>
+        {/* Feedback */}
+        {errorMessage && (
+          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {errorMessage}
+          </div>
+        )}
+        {successMessage && (
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+            {successMessage}
+          </div>
+        )}
 
         {/* Bottom Actions */}
         <div className="flex justify-end gap-3 pt-4">
           <button type="button" onClick={handleCancel} className="px-5 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-800 transition">
             Cancel
           </button>
-          <button type="submit"
-            className="px-6 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-lg shadow-sm transition">
-            Save Tour
+          <button type="submit" disabled={isSaving}
+            className="px-6 py-2.5 bg-teal-700 hover:bg-teal-800 disabled:opacity-60 disabled:cursor-not-allowed text-white text-xs font-semibold rounded-lg shadow-sm transition">
+            {isSaving ? 'Saving...' : 'Save Tour'}
           </button>
         </div>
       </form>
