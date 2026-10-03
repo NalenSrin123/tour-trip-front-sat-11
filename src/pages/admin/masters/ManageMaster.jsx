@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Plus,
     Search,
@@ -16,7 +16,28 @@ import {
     X
 } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import { fetchTours } from "../../../services/tourService";
 
+
+const PLACEHOLDER_THUMBNAIL =
+    'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=120';
+
+const CATEGORY_LABELS = {
+    1: 'CULTURAL HERITAGE',
+    2: 'ADVENTURE & NATURE',
+};
+
+function toRow(tour, continuingIndex) {
+    return {
+        id: `T-${String(continuingIndex).padStart(3, '0')}`,
+        backendId: tour.id,
+        name: tour.title,
+        category: CATEGORY_LABELS[tour.category_id] || 'UNCATEGORIZED',
+        price: Number(tour.price) || 0,
+        status: 'Active',
+        thumbnail: PLACEHOLDER_THUMBNAIL,
+    };
+}
 // Full list of 42 sample tours matching the exact design and requirements
 const INITIAL_TOURS = Array.from({ length: 42 }, (_, index) => {
     const idNum = index + 1;
@@ -77,6 +98,25 @@ export default function App() {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentTour, setCurrentTour] = useState(null);
     const [toastMessage, setToastMessage] = useState(null);
+
+    useEffect(() => {
+    fetchTours()
+        .then((response) => {
+            const backendTours = response?.data ?? response ?? [];
+
+            const mapped = backendTours.map((tour, index) =>
+                toRow(
+                    tour,
+                    INITIAL_TOURS.length + index + 1
+                )
+            );
+
+            setTours([...INITIAL_TOURS, ...mapped]);
+        })
+        .catch((error) => {
+            console.error("Failed to load tours:", error);
+        });
+    }, []);
 
     // Form states for Add/Edit
     const [formData, setFormData] = useState({

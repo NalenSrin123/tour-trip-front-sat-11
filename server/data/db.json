@@ -1,0 +1,56 @@
+{
+  "tours": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "destination_id": 1,
+      "title": "Angkor Wat",
+      "price": 89,
+      "duration": "2",
+      "included_services": null,
+      "excluded_services": null,
+      "rating_avg": null,
+      "created_at": "2026-10-03T05:25:46.734Z",
+      "updated_at": "2026-10-03T05:25:46.734Z"
+    },
+    {
+      "id": 2,
+      "category_id": 2,
+      "destination_id": 2,
+      "title": "Phnom Penh",
+      "price": 89,
+      "duration": "2",
+      "included_services": null,
+      "excluded_services": null,
+      "rating_avg": null,
+      "created_at": "2026-10-03T05:38:36.440Z",
+      "updated_at": "2026-10-03T05:38:36.440Z"
+    },
+    {
+      "id": 3,
+      "category_id": 1,
+      "destination_id": 2,
+      "title": "Phnom Penh",
+      "price": 199,
+      "duration": "2",
+      "included_services": null,
+      "excluded_services": null,
+      "rating_avg": null,
+      "created_at": "2026-10-03T05:56:34.056Z",
+      "updated_at": "2026-10-03T05:56:34.056Z"
+    },
+    {
+      "id": 4,
+      "category_id": 1,
+      "destination_id": 2,
+      "title": "Phnom Penh",
+      "price": 199,
+      "duration": "2",
+      "included_services": null,
+      "excluded_services": null,
+      "rating_avg": null,
+      "created_at": "2026-10-03T05:57:20.279Z",
+      "updated_at": "2026-10-03T05:57:20.279Z"
+    }
+  ]
+}
