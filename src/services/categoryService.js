@@ -7,6 +7,11 @@ const SIMULATED_DELAY_MS = 500;
 let categoriesStore = mockCategories.map((c) => ({ ...c }));
 let nextId = Math.max(...categoriesStore.map((c) => c.id)) + 1;
 
+
+/** @type {Array<object>} */
+let categoriesStores = mockCategories.map((c) => ({ ...c }));
+let nextIds = Math.max(...categoriesStore.map((c) => c.id)) + 1;
+
 function delay(value) {
   return new Promise((resolve) => setTimeout(() => resolve(value), SIMULATED_DELAY_MS));
 }
@@ -16,6 +21,9 @@ function clone(value) {
 }
 
 /** Fetch all categories. */
+export async function getCategories() {
+  return delay(clone(categoriesStore));
+}
 export async function getCategories() {
   return delay(clone(categoriesStore));
 }
