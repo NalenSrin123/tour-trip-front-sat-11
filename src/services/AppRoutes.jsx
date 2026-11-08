@@ -168,6 +168,10 @@ export const AppRoutes = () => {
           path="manageBooking"
           element={<ManageBooking />}
         />
+        <Route
+          path="manageBooking"
+          element={<Hello />}
+        />
 
 
         {/* Categories */}
