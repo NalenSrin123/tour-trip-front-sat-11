@@ -41,6 +41,9 @@ const ContactPage = () => {
             <h2 className="font-serif text-3xl font-semibold text-[#1F2937] sm:text-4xl">
               Get In Touch
             </h2>
+             <h2 className="font-serif text-3xl font-semibold text-[#1F2937] sm:text-4xl">
+              Get In Touch
+            </h2>
  
             <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
               {infoCards.map(({ icon: Icon, title, lines }) => (
